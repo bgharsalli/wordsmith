@@ -1,16 +1,13 @@
-# BUILD
-# use the build platforms matching arch rather than target arch
-FROM --platform=$BUILDPLATFORM golang:alpine as builder
+# BUILD stage
+FROM golang:alpine AS builder
 WORKDIR /usr/local/app
-ARG TARGETARCH
 
 COPY dispatcher.go .
 
-# build for the target arch not the build platform host arch
-RUN GOOS=linux GOARCH=$TARGETARCH go build dispatcher.go
+# Compilation classique pour Linux amd64
+RUN GOOS=linux GOARCH=amd64 go build -o dispatcher dispatcher.go
 
-# RUN
-# defaults to using the target arch image
+# RUN stage
 FROM alpine:latest
 WORKDIR /usr/local/app
 
