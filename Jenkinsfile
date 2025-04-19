@@ -10,8 +10,8 @@ pipeline {
 
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        DOCKER_CREDENTIALS_ID = 'docker'
-        SONAR_CREDENTIALS_ID = 'Sonar-token'
+        DOCKER_CREDENTIALS_ID = 'docker-credentials'
+        SONAR_CREDENTIALS_ID = 'sonar-token'
     }
     stages {
 
@@ -61,7 +61,6 @@ pipeline {
         //        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
         //    }
         //}
-
 
         stage('Trivy FS Scan') {
             steps {
