@@ -5,13 +5,14 @@ metadata:
   labels:
     app: db
 spec:
+  type: NodePort
   ports:
     - port: 5432
       targetPort: 5432
+      nodePort: 30432
       name: db
   selector:
     app: db
-  clusterIP: None
 ---
 apiVersion: apps/v1
 kind: Deployment

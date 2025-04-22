@@ -5,13 +5,14 @@ metadata:
   labels:
     app: web
 spec:
+  type: NodePort
   ports:
     - port: 8080
       targetPort: 80
+      nodePort: 30080
       name: web
   selector:
     app: web
-  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
