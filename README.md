@@ -1,12 +1,15 @@
 # Wordsmith App
+Wordsmith est le projet de démonstration présenté à l'origine à la DockerCon EU 2017 et 2018.
 
-Wordsmith is the demo project originally shown at DockerCon EU 2017 and 2018.
+L'application de démonstration fonctionne dans trois conteneurs :
 
-The demo app runs across three containers:
+api - une API Java REST qui sert les mots lus dans la base de données
+web - une application web Go qui appelle l'API et construit des mots en phrases
+db - une base de données Postgres qui stocke les mots.
 
-- **[api](api/Dockerfile)** - a Java REST API which serves words read from the database
-- **[web](web/Dockerfile)** - a Go web application that calls the API and builds words into sentences
-- **db** - a Postgres database that stores words
+- **[api](api/Dockerfile)** - une API Java REST qui sert les mots lus dans la base de données
+- **[web](web/Dockerfile)** - une application web Go qui appelle l'API et construit des mots en phrases
+- **db** - une base de données Postgres qui stocke les mots.
 
 ## Architecture
 
@@ -14,29 +17,28 @@ The demo app runs across three containers:
 
 ## Build and run in Docker Compose
 
-The only requirement to build and run the app from source is Docker. Clone this repo and use Docker Compose to build all the images. You can use the new V2 Compose with `docker compose` or the classic `docker-compose` CLI:
+construire et exécuter dans Docker Compose
+La seule exigence pour construire et exécuter l'application à partir des sources est Docker. Clonez ce repo et utilisez Docker Compose pour construire toutes les images. Vous pouvez utiliser la nouvelle V2 Compose avec docker compose ou le CLI classique docker-compose :
 
 ```shell
 docker compose up --build
 ```
-
-Or you can pull pre-built images from Docker Hub using `docker compose pull`.
+Vous pouvez également récupérer des images préconstruites depuis Docker Hub en utilisant docker compose pull.
 
 
 ## Deploy using Kubernetes manifests
 
-You can deploy the same app to Kubernetes using the [Kustomize configuration](./kustomization.yaml). It will define all of the necessary Deployment and Service objects and a ConfigMap to provide the database schema.
+Vous pouvez déployer la même application sur Kubernetes à l'aide de l'application [Kustomize configuration](./kustomization.yaml). Il définira tous les objets de déploiement et de service nécessaires ainsi qu'un ConfigMap pour fournir le schéma de la base de données.
 
-Apply the manifest using `kubectl` while at the root of the project:
+Appliquer le manifeste en utilisant `kubectl` à la racine du projet :
 
 ```shell
 kubectl apply -k .
 ```
 
-Once the pods are running, browse to http://localhost:8080 and you will see the site.
+Une fois que les pods fonctionnent, naviguez jusqu'à  http://localhost:8080 et vous verrez le site.
 
-Docker Desktop includes Kubernetes and the [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) command line, so you can work directly with the cluster. Check the services are up, and you should see output like this:
-
+Docker Desktop inclut Kubernetes et  la ligne de commande [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) , soafin que vous puissiez travailler directement avec le cluster. Vérifiez que les services sont en place, et vous devriez obtenir une sortie comme celle-ci :
 ```text
 kubectl get svc
 NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
@@ -45,8 +47,7 @@ kubernetes   ClusterIP      10.96.0.1        <none>        443/TCP          38d
 web          LoadBalancer   10.107.215.211   <pending>     8080:30220/TCP   2m
 words        ClusterIP      None             <none>        55555/TCP        2m
 ```
-
-Check the pods are running and you should see one pod each for the database and web components and five pods for the words API:
+Vérifiez que les pods sont en cours d'exécution et vous devriez voir un pod pour la base de données et les composants Web et cinq pods pour l'API de mots :
 
 ```text
 kubectl get pods
