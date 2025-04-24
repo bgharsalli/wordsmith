@@ -15,7 +15,7 @@ db - une base de données Postgres qui stocke les mots.
 
 ![Architecture diagram](architecture.excalidraw.png)
 
-## Build and run in Docker Compose
+## Build et run avec Docker Compose
 
 construire et exécuter dans Docker Compose
 La seule exigence pour construire et exécuter l'application à partir des sources est Docker. Clonez ce repo et utilisez Docker Compose pour construire toutes les images. Vous pouvez utiliser la nouvelle V2 Compose avec docker compose ou le CLI classique docker-compose :
@@ -26,7 +26,7 @@ docker compose up --build
 Vous pouvez également récupérer des images préconstruites depuis Docker Hub en utilisant docker compose pull.
 
 
-## Deploy using Kubernetes manifests
+## Déployer à l'aide des manifestes Kubernetes
 
 Vous pouvez déployer la même application sur Kubernetes à l'aide de l'application [Kustomize configuration](./kustomization.yaml). Il définira tous les objets de déploiement et de service nécessaires ainsi qu'un ConfigMap pour fournir le schéma de la base de données.
 
