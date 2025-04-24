@@ -38,7 +38,7 @@ kubectl apply -k .
 
 Une fois que les pods fonctionnent, naviguez jusqu'à  http://localhost:8080 et vous verrez le site.
 
-Docker Desktop inclut Kubernetes et  la ligne de commande [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) , soafin que vous puissiez travailler directement avec le cluster. Vérifiez que les services sont en place, et vous devriez obtenir une sortie comme celle-ci :
+Docker Desktop inclut Kubernetes et  la ligne de commande [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) , afin que vous puissiez travailler directement avec le cluster. Vérifiez que les services sont en place, et vous devriez obtenir une sortie comme celle-ci :
 ```text
 kubectl get svc
 NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
